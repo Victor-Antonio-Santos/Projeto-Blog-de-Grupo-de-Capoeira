@@ -4,10 +4,6 @@ Site institucional administrável em Java 17, Spring Boot MVC, Thymeleaf, Spring
 
 ## Execução simples no WildFly
 
-Não é necessário criar banco nem configurar senha. Os dados ficam em
-`WILDFLY_HOME/standalone/data/capoeira-mundial.mv.db` e sobrevivem aos reinícios.
-O primeiro acesso administrativo usa `admin` / `CapoeiraAdmin@2026`.
-
 ## PostgreSQL opcional
 
 Nunca publique credenciais no Git. Defina as variáveis abaixo no sistema, no IntelliJ ou na configuração do WildFly:
