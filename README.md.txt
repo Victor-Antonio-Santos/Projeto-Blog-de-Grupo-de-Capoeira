@@ -1,68 +1,196 @@
 # Grupo Capoeira Mundial
 
-Site institucional administrável em Java 17, Spring Boot MVC, Thymeleaf, Spring Security e JPA/Hibernate. Por padrão usa H2 persistente no diretório de dados do WildFly. O PostgreSQL continua disponível pelo perfil `postgres`.
+Site institucional administrável desenvolvido com **Java 17**, **Spring Boot MVC**, **Thymeleaf**, **Spring Security** e **JPA/Hibernate**.
 
-## Execução simples no WildFly
+Por padrão, a aplicação utiliza o banco de dados **H2** persistente. Também é possível utilizar **PostgreSQL** por meio do perfil `postgres`.
 
-## PostgreSQL opcional
+---
 
-Nunca publique credenciais no Git. Defina as variáveis abaixo no sistema, no IntelliJ ou na configuração do WildFly:
+# Tecnologias utilizadas
 
-```text
-CAPOEIRA_DB_URL=jdbc:postgresql://localhost:5432/capoeira_mundial
-CAPOEIRA_DB_USERNAME=capoeira
-CAPOEIRA_DB_PASSWORD=sua_senha
-CAPOEIRA_ADMIN_USERNAME=admin
-CAPOEIRA_ADMIN_PASSWORD=uma_senha_forte
-UPLOAD_DIR=C:/capoeira-mundial/uploads
+- Java 17
+- Spring Boot
+- Spring MVC
+- Spring Security
+- Spring Data JPA (Hibernate)
+- Thymeleaf
+- Maven
+- H2 Database
+- PostgreSQL
+- WildFly 27+
+
+---
+
+# Executando o projeto no IntelliJ IDEA
+
+## Pré-requisitos
+
+- JDK 17
+- Maven
+- IntelliJ IDEA
+- PostgreSQL (opcional)
+
+### Passos
+
+1. Abra o projeto como um projeto Maven.
+2. Configure o JDK 17.
+3. Caso utilize PostgreSQL:
+   - Crie o banco de dados `capoeira_mundial`.
+   - Conceda acesso ao usuário configurado na aplicação.
+4. Crie uma configuração **Spring Boot** para a classe:
+
+```
+CapoeiraMundialApplication
 ```
 
-Ative com `--spring.profiles.active=postgres`. As variáveis têm o prefixo `CAPOEIRA_` para não colidirem com outros WARs. O administrador inicial é criado no primeiro start e a senha é armazenada com BCrypt.
+5. Execute utilizando um dos perfis:
 
-## Executar no IntelliJ IDEA
+```
+--spring.profiles.active=dev
+```
 
-1. Abra esta pasta como projeto Maven e selecione um JDK 17.
-2. Crie o banco `capoeira_mundial` no PostgreSQL e dê acesso ao usuário `capoeira`.
-3. Em **Run > Edit Configurations**, crie uma configuração Spring Boot para `CapoeiraMundialApplication`.
-4. Use o perfil `dev` (`--spring.profiles.active=dev`) ou configure as variáveis acima.
-5. Execute e acesse `http://localhost:8080/`. O painel fica em `/admin`.
+ou
 
-## Build e deploy no WildFly
+```
+--spring.profiles.active=postgres
+```
 
-Requer WildFly 27 ou superior e Java 17.
+6. Acesse:
+
+```
+http://localhost:8080/
+```
+
+Painel administrativo:
+
+```
+http://localhost:8080/admin
+```
+
+---
+
+# Utilizando PostgreSQL
+
+Para utilizar PostgreSQL, defina as variáveis de ambiente da aplicação antes da execução.
+
+Ative o perfil:
+
+```
+--spring.profiles.active=postgres
+```
+
+> **Importante:** Nunca publique credenciais no Git. Utilize variáveis de ambiente ou a configuração do servidor.
+
+O administrador padrão é criado automaticamente na primeira execução e sua senha é armazenada utilizando **BCrypt**.
+
+---
+
+# Build do projeto
+
+Execute:
 
 ```bash
 mvn clean package
 ```
 
-O arquivo será gerado em `target/capoeira-mundial.war`. No IntelliJ Ultimate:
+O arquivo gerado será:
 
-1. Adicione uma configuração **JBoss Server > Local** apontando para o WildFly.
-2. Em **Deployment**, adicione o artifact `capoeira-mundial:war`.
-3. Configure as variáveis de ambiente na aba de inicialização.
-4. Inicie o servidor e acesse `/capoeira-mundial/`.
+```
+target/capoeira-mundial.war
+```
 
-O projeto inclui `WEB-INF/jboss-deployment-structure.xml`. Ele isola os módulos
-SLF4J fornecidos pelo WildFly para que não concorram com o Logback do Spring
-Boot. Depois de alterar essa configuração, faça **Build > Rebuild Project** e
-remova/republique o artifact no WildFly; um WAR antigo continuará apresentando
-o erro `LoggerFactory is not a Logback LoggerContext`.
+---
 
-Também é possível copiar o WAR para `WILDFLY_HOME/standalone/deployments/`. O Tomcat está com escopo `provided`; o WildFly fornece o servlet container.
+# Deploy no WildFly
 
-## Estrutura
+Requisitos:
+
+- WildFly 27 ou superior
+- Java 17
+
+No IntelliJ Ultimate:
+
+1. Crie uma configuração **JBoss Server > Local**.
+2. Aponte para a instalação do WildFly.
+3. Em **Deployment**, adicione o artefato:
+
+```
+capoeira-mundial:war
+```
+
+4. Configure as variáveis de ambiente.
+5. Inicie o servidor.
+
+A aplicação ficará disponível em:
+
+```
+http://localhost:8080/capoeira-mundial/
+```
+
+Também é possível copiar diretamente o arquivo `.war` para:
+
+```
+WILDFLY_HOME/standalone/deployments/
+```
+
+O Tomcat está configurado com escopo `provided`, pois o WildFly fornece o container Servlet.
+
+---
+
+# Estrutura do projeto
 
 ```text
 src/main/java/br/com/capoeiramundial/
-├── config/       segurança, seed e recursos web
-├── controller/   páginas públicas, admin e erros
-├── entity/       entidades JPA
-├── repository/   acesso a dados
-└── service/      armazenamento e validação de uploads
+├── config/        Configurações de segurança e recursos
+├── controller/    Controllers das páginas públicas e administrativas
+├── entity/        Entidades JPA
+├── repository/    Repositórios
+└── service/       Serviços da aplicação
+
 src/main/resources/
-├── static/       CSS e JavaScript
-├── templates/    páginas Thymeleaf públicas e administrativas
+├── static/        Arquivos CSS, JavaScript e imagens
+├── templates/     Templates Thymeleaf
 └── application*.properties
 ```
 
-Uploads aceitos: JPG, JPEG, PNG, WEBP e MP4. O tamanho máximo é 100 MB por arquivo.
+---
+
+# Upload de arquivos
+
+Tipos permitidos:
+
+- JPG
+- JPEG
+- PNG
+- WEBP
+- MP4
+
+Tamanho máximo por arquivo:
+
+```
+100 MB
+```
+
+---
+
+# Observações
+
+O projeto possui o arquivo:
+
+```
+WEB-INF/jboss-deployment-structure.xml
+```
+
+Esse arquivo isola os módulos **SLF4J** fornecidos pelo WildFly, evitando conflitos com o **Logback** utilizado pelo Spring Boot.
+
+Após qualquer alteração nesse arquivo:
+
+1. Execute **Build > Rebuild Project**.
+2. Remova o WAR antigo do WildFly.
+3. Faça um novo deploy da aplicação.
+
+Isso evita erros como:
+
+```
+LoggerFactory is not a Logback LoggerContext
+```
