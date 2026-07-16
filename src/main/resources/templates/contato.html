@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Contato',~{::main})}">
+<main>
+    <section class="page-hero"><span class="eyebrow">Fale com a gente</span>
+        <h1>Entre na roda.</h1>
+        <p>Uma conversa pode ser o começo de uma história inteira.</p></section>
+    <section class="contact-section section">
+        <div><h2>Vamos conversar?</h2>
+            <p>Para conhecer os treinos, levar o grupo a um evento ou tirar dúvidas, mande uma mensagem.</p><a
+                    class="btn primary" th:href="${whatsapp}" target="_blank">WhatsApp ↗</a>
+            <div th:each="c : ${contacts}"><a th:href="${c.url}" th:text="|${c.label}: ${c.value}|"></a></div>
+        </div>
+        <form method="post" th:action="@{/contato}">
+            <div class="flash success" th:if="${success}" th:text="${success}"></div>
+            <label>Seu nome<input name="nome" required></label><label>Seu e-mail<input type="email" name="email"
+                                                                                       required></label><label>Como
+            podemos ajudar?<textarea name="mensagem" rows="5" required></textarea></label>
+            <button class="btn dark" type="submit">Enviar mensagem</button>
+        </form>
+    </section>
+</main>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" th:fragment="page(title,content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title th:text="|${title} — Grupo Capoeira Mundial|"></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/site.css(v=7)}">
+    <link rel="stylesheet" th:href="@{/css/responsive-media.css(v=2)}">
+</head>
+<body>
+<header th:replace="~{fragments/site :: header}"></header>
+<th:block th:replace="${content}"></th:block>
+<footer th:replace="~{fragments/site :: footer}"></footer>
+<a th:replace="~{fragments/site :: whatsapp}"></a>
+<script th:src="@{/js/site.js(v=2)}"></script>
+</body>
+</html>

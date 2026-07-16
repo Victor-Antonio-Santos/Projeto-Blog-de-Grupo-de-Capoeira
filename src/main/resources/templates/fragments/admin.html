@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<body>
+<aside th:fragment="sidebar" class="sidebar"><a class="admin-brand"
+                                                th:href="@{/admin}"><b>M</b><span>CAPOEIRA MUNDIAL<small>ADMINISTRAÇÃO</small></span></a>
+    <nav><a th:href="@{/admin}">Visão geral</a><a th:href="@{/admin/eventos}">Eventos</a><a
+            th:href="@{/admin/integrantes}">Integrantes</a><a th:href="@{/admin/videos}">Vídeos</a><a
+            th:href="@{/admin/agenda}">Agenda de treinos</a><a th:href="@{/admin/galeria}">Galeria</a><a
+            th:href="@{/admin/conteudo}">Textos do site</a><a th:href="@{/admin/contatos}">Contatos e redes</a></nav>
+    <div class="sidebar-bottom"><a th:href="@{/}" target="_blank">Ver site ↗</a>
+        <form th:action="@{/admin/logout}" method="post">
+            <button>Sair</button>
+        </form>
+    </div>
+</aside>
+</body>
+</html>

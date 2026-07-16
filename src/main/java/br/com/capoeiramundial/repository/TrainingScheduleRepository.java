@@ -1,0 +1,1 @@
+package br.com.capoeiramundial.repository; import br.com.capoeiramundial.entity.TrainingSchedule; import org.springframework.data.jpa.repository.JpaRepository; public interface TrainingScheduleRepository extends JpaRepository<TrainingSchedule,Long>{}

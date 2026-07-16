@@ -1,0 +1,7 @@
+target/
+.idea/
+*.iml
+uploads/*
+!uploads/.gitkeep
+.env
+application-local.properties

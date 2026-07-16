@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Integrantes',~{::main})}">
+<main>
+    <section class="page-hero"><span class="eyebrow">Nossa comunidade</span>
+        <h1>Quem são os pilares do mundial</h1>
+        <p>Mestres, professores, instrutores, monitores e alunos unidos pela mesma paixão.</p></section>
+    <section class="people-grid section">
+        <article th:each="m : ${members}" class="person" th:with="displayName=${m.nickname ?: m.name}">
+            <div class="person-photo"
+                 th:style="${m.photoUrl != null} ? |background-image:url('${m.photoUrl}')| : ''"></div>
+            <span th:if="${!#strings.isEmpty(m.role) and !#strings.equalsIgnoreCase(m.role,m.graduation) and !#strings.equalsIgnoreCase(m.role,displayName)}"
+                  th:text="${m.role}"></span>
+            <h2 th:if="${!#strings.isEmpty(displayName)}" th:text="${displayName}"></h2><strong
+                th:if="${!#strings.isEmpty(m.graduation) and !#strings.equalsIgnoreCase(m.graduation,displayName)}"
+                th:text="${m.graduation}"></strong>
+            <p th:if="${!#strings.isEmpty(m.biography)}" th:text="${m.biography}"></p></article>
+    </section>
+</main>
+</html>

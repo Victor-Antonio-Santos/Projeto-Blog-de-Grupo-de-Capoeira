@@ -1,0 +1,22 @@
+/* Arquivos enviados respeitam a proporção gravada no próprio vídeo. */
+.video-grid .uploaded-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 78vh;
+  aspect-ratio: auto;
+  object-fit: contain;
+  background: #111;
+}
+
+/* Incorporações do YouTube continuam em seu formato padrão. */
+.video-grid .video-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 800px) {
+  .video-grid .uploaded-video {
+    max-height: 70vh;
+  }
+}

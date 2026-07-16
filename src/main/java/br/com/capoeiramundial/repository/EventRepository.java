@@ -1,0 +1,1 @@
+package br.com.capoeiramundial.repository; import br.com.capoeiramundial.entity.Event; import org.springframework.data.jpa.repository.JpaRepository; import java.util.List; public interface EventRepository extends JpaRepository<Event,Long>{List<Event> findAllByOrderByEventDateAsc();}

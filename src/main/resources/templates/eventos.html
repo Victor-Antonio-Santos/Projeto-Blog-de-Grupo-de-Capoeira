@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Eventos',~{::main})}">
+<main>
+    <section class="page-hero"><span class="eyebrow">Na roda e no mundo</span>
+        <h1>Próximos encontros.</h1>
+        <p>Batizados, rodas, oficinas e encontros que mantêm nossa cultura em movimento.</p></section>
+    <section class="editorial-grid section">
+        <article th:each="e : ${events}" class="event-card">
+            <div class="media" th:style="${e.imageUrl != null} ? |background-image:url('${e.imageUrl}')| : ''"><span
+                    th:class="|status ${#strings.toLowerCase(e.status)}|" th:text="${e.status}"></span></div>
+            <div>
+                <time th:text="${#temporals.format(e.eventDate,'dd MMM yyyy')}"></time>
+                <h2 th:text="${e.title}"></h2>
+                <p th:text="${e.description}"></p><strong th:text="${e.location}"></strong></div>
+        </article>
+        <div class="empty" th:if="${#lists.isEmpty(events)}">A próxima roda já está sendo preparada.</div>
+    </section>
+</main>
+</html>

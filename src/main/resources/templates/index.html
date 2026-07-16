@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Grupo Capoeira Mundial — Ginga que transforma</title>
+    <meta name="description" content="Capoeira, cultura e transformação social desde 2019.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/site.css(v=7)}">
+</head>
+<body>
+<header th:replace="~{fragments/site :: header}"></header>
+<main>
+    <section class="hero">
+        <div class="hero-media"
+             th:style="|background-image:linear-gradient(90deg,#0c100ee8 0%,#0c100e80 48%,#0c100e20 75%),url('${heroImage}')|"></div>
+        <div class="hero-grain"></div>
+        <div class="hero-copy"><p class="eyebrow reveal">Desde 2019 · Goiania - GO, Brasil</p>
+            <h1 class="reveal">Não apenas jogamos capoeira<br><em>vivemos capoeira.</em></h1>
+            <p class="hero-lead reveal">Mais que luta. Uma cultura que cria raízes, fortalece jovens e transforma
+                caminhos.</p>
+            <div class="hero-actions reveal"><a class="btn primary" th:href="@{/agenda}">Encontrar um treino
+                <span>↗</span></a><a class="text-link" th:href="@{/sobre}">Conheça nossa história</a></div>
+        </div>
+        <span class="scroll-cue">Role para entrar na roda ↓</span></section>
+    <section class="manifesto section">
+        <div class="section-kicker reveal">Nossa essência</div>
+        <div><h2 class="display reveal">Cada ginga conta<br>uma nova história.</h2>
+            <p class="large-copy reveal" th:text="${intro}"></p><a class="arrow-link" th:href="@{/sobre}">Nossa história
+                completa <span>→</span></a>
+            <div class="manifesto-logos reveal" aria-label="Instituições parceiras">
+                <img th:src="@{/img/logos/grao-mestre-darci-transparente.png}" alt="Grão Mestre Darci de Freitas">
+                <img th:src="@{/img/logos/capoeira-mundial-transparente.png}" alt="Capoeira Mundial Mestre Chumbim">
+                <img th:src="@{/img/logos/associacao-defesa-pessoal-transparente.png}" alt="Associação Defesa Pessoal Policiais Militares">
+                <img th:src="@{/img/logos/federacao-mundial-transparente.png}" alt="Federação Mundial FE.DE.PM.GO">
+            </div>
+        </div>
+    </section>
+    <section class="founder">
+        <div class="founder-image reveal" th:style="|background-image:url('${founderImage}')|"></div>
+        <div class="founder-copy reveal"><span class="section-kicker">Quem puxa a roda</span>
+            <h2>Mestre<br>Chumbim</h2>
+            <p>Marcos Ribeiro fundou o grupo para fazer da capoeira uma ponte entre tradição, disciplina e futuro.</p><a
+                    class="btn dark" th:href="@{/integrantes}">Conheça o grupo</a></div>
+    </section>
+    <section class="graduation-banner section">
+        <div class="graduation-banner-heading reveal"><span class="section-kicker">Nossa formação</span>
+            <h2 class="display">Ordem de<br>graduação.</h2>
+            <p>Conheça cada etapa do caminho dentro do Grupo Capoeira Mundial.</p></div>
+        <div class="graduation-banner-media reveal">
+            <img th:if="${!#strings.isEmpty(graduationImage)}" th:src="${graduationImage}"
+                 alt="Ordem de graduação do Grupo Capoeira Mundial">
+            <div class="graduation-banner-empty" th:if="${#strings.isEmpty(graduationImage)}">
+                Banner de graduação disponível em breve.
+            </div>
+        </div>
+    </section>
+    <section class="training section">
+        <div><span class="section-kicker">Treinos</span>
+            <h2 class="display">Venha conhecer<br>o nosso grupo.</h2></div>
+        <div class="schedule-list">
+            <article th:each="t : ${trainings}" class="schedule-row reveal">
+                <div><strong th:text="${t.weekday}">Terças</strong><span
+                        th:text="|${t.startTime} — ${t.endTime}|"></span></div>
+                <div><strong th:text="${t.venue}">Local</strong><span th:text="${t.cityState}"></span></div>
+                <a th:if="${t.mapsUrl}" th:href="${t.mapsUrl}" target="_blank">Ver mapa ↗</a></article>
+            <a class="btn primary" th:href="@{/agenda}">Ver todos os treinos</a></div>
+    </section>
+    <section class="pulse">
+        <div class="pulse-image" th:style="|background-image:url('${ctaImage}')|"></div>
+        <div class="pulse-copy reveal"><span>Vem para a roda</span>
+            <h2>Seu primeiro passo<br>começa na ginga.</h2>
+            <p>Não precisa ter experiência. Só vontade de aprender, se movimentar e fazer parte.</p>
+            <a class="btn light"
+               th:href="${whatsapp}"
+               target="_blank">Falar no WhatsApp ↗</a></div>
+    </section>
+</main>
+<footer th:replace="~{fragments/site :: footer}"></footer>
+<a th:replace="~{fragments/site :: whatsapp}"></a>
+<script th:src="@{/js/site.js(v=3)}"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.3">
+    <deployment>
+        <!--
+          Spring Boot traz SLF4J + Logback dentro do WAR. O WildFly também
+          injeta uma implementação SLF4J ligada ao JBoss LogManager; manter as
+          duas produz "LoggerFactory is not a Logback LoggerContext".
+        -->
+        <exclusions>
+            <module name="org.slf4j"/>
+            <module name="org.slf4j.impl"/>
+            <!-- Spring Boot 3.3 usa Jakarta Persistence 3.1/Hibernate 6.5.
+                 WildFly 40 fornece JPA 3.2/Hibernate 7; misturar as versões
+                 causa conflito no método EntityManagerFactory#getSchemaManager. -->
+            <module name="jakarta.persistence.api"/>
+            <module name="org.hibernate"/>
+            <module name="org.hibernate.envers"/>
+        </exclusions>
+        <exclude-subsystems>
+            <!-- A aplicação gerencia JPA via Spring, não pelo subsistema JPA do servidor. -->
+            <subsystem name="jpa"/>
+        </exclude-subsystems>
+    </deployment>
+</jboss-deployment-structure>

@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: page('Página não encontrada',~{::main})}">
+<main class="error-page"><span>404</span>
+    <h1>Essa roda não existe.</h1>
+    <p>Mas tem muita coisa acontecendo por aqui.</p><a class="btn primary" th:href="@{/}">Voltar ao início</a></main>
+</html>

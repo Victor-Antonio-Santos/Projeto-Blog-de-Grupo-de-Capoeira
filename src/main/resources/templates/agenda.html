@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Agenda de treinos',~{::main})}">
+<main>
+    <section class="page-hero"><span class="eyebrow">Agenda</span>
+        <h1>Encontre sua roda.</h1>
+        <p>Escolha um horário, chegue junto e faça sua primeira aula.</p></section>
+    <section class="section inner-list">
+        <article th:each="t : ${trainings}" class="training-item">
+            <div class="day" th:text="${t.weekday}"></div>
+            <div><strong th:text="|${t.startTime} — ${t.endTime}|"></strong>
+                <p th:text="${t.venue}"></p><span th:text="${t.cityState}"></span><small th:if="${t.notes}"
+                                                                                         th:text="${t.notes}"></small>
+            </div>
+            <a class="btn outline" th:if="${t.mapsUrl}" th:href="${t.mapsUrl}" target="_blank">Ver localização ↗</a>
+        </article>
+        <div class="empty" th:if="${#lists.isEmpty(trainings)}">Novos horários serão publicados em breve.</div>
+    </section>
+</main>
+</html>

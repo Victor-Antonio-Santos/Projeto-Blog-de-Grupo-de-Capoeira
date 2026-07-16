@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="header" class="site-top">
+    <header class="site-header"><a class="brand" th:href="@{/}"><span class="brand-mark">M</span><span>GRUPO CAPOEIRA<small>MUNDIAL</small></span></a>
+        <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+        <nav><a th:href="@{/}">Início</a><a th:href="@{/agenda}">Treinos</a><a th:href="@{/eventos}">Eventos</a><a
+                th:href="@{/integrantes}">Integrantes</a><a th:href="@{/videos}">Vídeos</a><a
+                th:href="@{/sobre}">Sobre</a><a th:href="@{/contato}">Contato</a><a th:href="@{/admin}" class="nav-cta"
+                                                                                    aria-label="Entrar na área administrativa">Administrador</a>
+        </nav>
+    </header>
+</div>
+<footer th:fragment="footer" class="site-footer">
+    <div><a class="brand footer-brand" th:href="@{/}"><span class="brand-mark">M</span><span>GRUPO CAPOEIRA<small>MUNDIAL</small></span></a>
+        <p>Ginga, cultura e transformação desde 2019.</p></div>
+    <div><strong>Encontre sua roda</strong><a th:href="@{/agenda}">Agenda de treinos</a><a th:href="@{/contato}">Fale
+        com a gente</a><a th:href="@{/admin}">Área administrativa</a></div>
+    <p class="copyright">© <span id="year"></span> Grupo Capoeira Mundial.</p>
+</footer>
+<a th:fragment="whatsapp" class="whatsapp" th:href="${whatsapp}" target="_blank" rel="noopener"
+   aria-label="Conversar pelo WhatsApp">✦<span>WhatsApp</span></a>
+</body>
+</html>

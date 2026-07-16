@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Vídeos',~{::main})}">
+<main>
+    <section class="page-hero"><span class="eyebrow">Assista</span>
+        <h1>Capoeira em movimento.</h1>
+        <p>Rodas, treinos e histórias para sentir o ritmo de onde estiver.</p></section>
+    <section class="video-grid section">
+        <article th:each="v : ${videos}" class="video-item">
+            <div class="video-frame" th:if="${v.youtubeUrl}">
+                <iframe th:src="${#strings.replace(v.youtubeUrl,'watch?v=','embed/')}" th:title="${v.title}"
+                        allowfullscreen></iframe>
+            </div>
+            <video class="uploaded-video" th:if="${v.fileUrl}" controls playsinline preload="metadata"
+                   th:poster="${v.thumbnailUrl}">
+                <source th:src="${v.fileUrl}" type="video/mp4">
+            </video>
+            <time th:text="${v.publishedAt}"></time>
+            <h2 th:text="${v.title}"></h2>
+            <p th:text="${v.description}"></p></article>
+    </section>
+</main>
+</html>

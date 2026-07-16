@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Sobre',~{::main})}">
+<main>
+    <section class="page-hero about-hero"><span class="eyebrow">Desde 2019</span>
+        <h1>Raiz no passado.<br>Olhos no futuro.</h1>
+        <p th:text="${history}"></p></section>
+    <section class="values section">
+        <article><span>01</span>
+            <h2>Missão</h2>
+            <p>Promover a capoeira como cultura, esporte e ferramenta de transformação social.</p></article>
+        <article><span>02</span>
+            <h2>Visão</h2>
+            <p>Formar uma comunidade forte, acolhedora e reconhecida por preservar e compartilhar essa herança.</p>
+        </article>
+        <article><span>03</span>
+            <h2>Valores</h2>
+            <p>Respeito, disciplina, ancestralidade, inclusão, coragem e espírito coletivo.</p></article>
+    </section>
+    <section class="graduation section"><span class="section-kicker">Caminho de evolução</span>
+        <h2 class="display">Graduação é jornada,<br>não atalho.</h2>
+        <div class="cords"><span>Aluno</span><span>Graduado</span><span>Monitor</span><span>Instrutor</span><span>Professor</span><span>Contramestre</span><span>Mestre</span>
+        </div>
+    </section>
+</main>
+</html>

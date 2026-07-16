@@ -1,0 +1,1 @@
+package br.com.capoeiramundial; import org.junit.jupiter.api.Test; import org.springframework.boot.test.context.SpringBootTest; @SpringBootTest class CapoeiraMundialApplicationTests {@Test void contextLoads(){}}
