@@ -1,5 +1,7 @@
 **# Grupo Capoeira Mundial
 
+Projeto criado ultilizando o Codex da OpenAI
+
 Site institucional administrável desenvolvido com **Java 17**, **Spring Boot MVC**, **Thymeleaf**, **Spring Security** e **JPA/Hibernate**.
 
 Por padrão, a aplicação utiliza o banco de dados **H2** persistente. Também é possível utilizar **PostgreSQL** por meio do perfil `postgres`.
